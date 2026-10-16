@@ -1,0 +1,13 @@
+{
+  "version": "probability-v2.1",
+  "changes": "separate position estimate and matchup prediction; unchanged model weights",
+  "files": {
+    "reversi/analysis.py": "267d592ad18883da1cd41e60a49fdb12f4c10aa0ce6261ebe09e867179bf5848",
+    "reversi/probability.py": "0b419c1a801228050da1eef5c0801034c62fb4a93cacd4c5d8e429eadcb14466",
+    "reversi/session.py": "b034795b8949e25c93dd20c2af7171198194e220773fb995ac439f1ca75c9b6d",
+    "web/app.js": "3194e4f3953ac38ba0b197b17717e1c215f2aad1b185ad472846a9309fcb51f3",
+    "web/index.html": "9fabd0e6f8e606d175b17bbb02a6f7909cde5ec78926cb1fde3bfc8ff5be6e89",
+    "data/probability_v2.json": "470456eeaef6ff1d94443850c4992ce61ab1d4523f689e189a74d6f47e6b7240",
+    "PROBABILITY_EVOLUTION.md": "a0299d60da88027fa3c87f9e172035cce641a57416f76780f2f84a8172364f04"
+  }
+}

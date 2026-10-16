@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reversi Lab · 黑白棋实验室</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#"
+        ><span class="brand-icon"><i></i><i></i><i></i><i></i></span
+        ><span>Reversi <b>Lab</b><small>黑白棋 · 算法实验室</small></span></a
+      >
+      <nav class="tabs" aria-label="主导航">
+        <button class="tab active" data-view="play">对弈空间</button>
+        <button class="tab" data-view="lab">算法实验</button>
+        <button class="tab" data-view="evolution">算法进化</button>
+        <button class="tab" data-view="about">项目说明</button>
+      </nav>
+      <div class="local-status">
+        <span id="connectionDot" class="status-dot"></span
+        ><span id="connectionText">本地引擎连接中</span>
+      </div>
+    </header>
+
+    <main>
+      <section id="view-play" class="view active">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">EXPLORE THE NEXT MOVE</div>
+            <h1>落子之间，探索智能。</h1>
+            <p>三种基线，三代创新策略。让每一步决策都有迹可循。</p>
+          </div>
+          <div class="heading-badge"><span>8 × 8</span>经典黑白棋</div>
+        </div>
+        <div class="game-layout">
+          <aside class="setup-column">
+            <section class="panel setup-panel">
+              <div class="panel-title">
+                <h2>对局设置</h2>
+                <span class="mini-label">SETUP</span>
+              </div>
+              <div class="segmented" role="group" aria-label="对弈模式">
+                <button id="pveBtn" class="selected">人机 PvE</button
+                ><button id="eveBtn">机机 Eve</button>
+              </div>
+              <div id="humanColorRow" class="field">
+                <label for="humanColor">我的执棋</label
+                ><select id="humanColor">
+                  <option value="1">● 黑方 · 先行</option>
+                  <option value="-1">○ 白方 · 后行</option>
+                </select>
+              </div>
+              <div class="side-config">
+                <div class="side-title">
+                  <span class="disc-dot black"></span>黑方<span
+                    id="blackRole"
+                    class="role-label"
+                    >玩家</span
+                  >
+                </div>
+                <label for="blackAlgorithm">算法模型</label
+                ><select id="blackAlgorithm"></select
+                ><label for="blackTime">思考时间上限</label>
+                <div class="time-select">
+                  <select id="blackTime"></select
+                  ><span>每步</span>
+                </div>
+              </div>
+              <div class="side-config">
+                <div class="side-title">
+                  <span class="disc-dot white"></span>白方<span
+                    id="whiteRole"
+                    class="role-label"
+                    >AI</span
+                  >
+                </div>
+                <label for="whiteAlgorithm">算法模型</label
+                ><select id="whiteAlgorithm"></select
+                ><label for="whiteTime">思考时间上限</label>
+                <div class="time-select">
+                  <select id="whiteTime"></select
+                  ><span>每步</span>
+                </div>
+              </div>
+              <p class="setting-note">
+                修改在下一回合生效。人类单步上限为 60 秒。
+              </p>
+              <button id="startBtn" class="button primary full">
+                <span>▶</span> 开始对局
+              </button>
+              <div class="button-row">
+                <button id="pauseBtn" class="button secondary" disabled>
+                  暂停</button
+                ><button id="newBtn" class="button secondary">新对局</button>
+              </div>
+            </section>
+            <section class="tip-card">
+              <span class="tip-symbol">↗</span>
+              <div>
+                <h3>让每毫秒更有效</h3>
+                <p>
+                  V3 组合主变化搜索、局面缓存和动态评估。旧版 V1、V2
+                  均可选择，方便对照算法进化。
+                </p>
+                <a class="text-link" href="#" id="toLab"
+                  >比较算法版本 <span>→</span></a
+                >
+              </div>
+            </section>
+          </aside>
+
+          <section class="board-column">
+            <div class="players">
+              <div id="blackPlayer" class="player-card current">
+                <span class="player-disc black"></span>
+                <div class="player-name">
+                  <strong>黑方 <small id="blackModelName">玩家</small></strong
+                  ><span id="blackTurnLabel">先行</span>
+                </div>
+                <strong class="piece-count" id="blackCount">2</strong>
+              </div>
+              <div id="whitePlayer" class="player-card">
+                <span class="player-disc white"></span>
+                <div class="player-name">
+                  <strong
+                    >白方 <small id="whiteModelName">Alpha-Beta</small></strong
+                  ><span id="whiteTurnLabel">后行</span>
+                </div>
+                <strong class="piece-count" id="whiteCount">2</strong>
+              </div>
+            </div>
+            <div class="board-frame">
+              <canvas id="board" aria-label="8乘8黑白棋棋盘"></canvas>
+              <div
+                id="boardGrid"
+                class="board-grid"
+                role="grid"
+                aria-label="选择合法落点"
+              ></div>
+              <div id="resultOverlay" class="result-overlay" hidden>
+                <div class="result-card">
+                  <span class="eyebrow">GAME COMPLETE</span>
+                  <h2 id="resultTitle"></h2>
+                  <p id="resultReason"></p>
+                  <button id="playAgainBtn" class="button primary">
+                    再来一局 →
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="board-footer">
+              <span id="turnStatus"
+                ><i class="status-dot"></i>准备就绪，黑方先行</span
+              >
+              <div>
+                <label class="switch-label"
+                  ><input id="showHints" type="checkbox" checked />
+                  合法落点</label
+                ><label class="switch-label"
+                  ><input id="animate" type="checkbox" checked /> 动画</label
+                >
+              </div>
+            </div>
+            <div class="clock-strip">
+              <div>
+                <span>本步用时</span
+                ><strong id="turnTime">0.00<small>s</small></strong>
+              </div>
+              <div>
+                <span>黑方累计</span
+                ><strong id="blackTotal">0.0<small>s</small></strong>
+              </div>
+              <div>
+                <span>白方累计</span
+                ><strong id="whiteTotal">0.0<small>s</small></strong>
+              </div>
+              <div>
+                <span>总思考用时</span
+                ><strong id="totalTime">0.0<small>s</small></strong>
+              </div>
+            </div>
+            <div class="time-track"><span id="timeTrack"></span></div>
+            <p class="clock-note">
+              每回合前统一分析局面，再开始计时。计时不含回合前分析与暂停。
+            </p>
+          </section>
+
+          <aside class="insight-column">
+            <section class="panel evaluation-panel">
+              <div class="panel-title">
+                <h2>局面洞察</h2>
+                <span id="analysisBadge" class="pill">待分析</span>
+              </div>
+              <div class="probability-labels">
+                <div><span>黑方胜</span><strong id="blackProb">—</strong></div>
+                <div class="draw-label">
+                  <span>和棋</span><strong id="drawProb">—</strong>
+                </div>
+                <div><span>白方胜</span><strong id="whiteProb">—</strong></div>
+              </div>
+              <div class="probability-bar">
+                <i id="blackBar"></i><i id="drawBar"></i><i id="whiteBar"></i>
+              </div>
+              <p id="analysisNote" class="muted">
+                对局开始后，由统一分析器自动更新。
+              </p>
+              <div id="solvedText" class="solved-text" hidden></div>
+              <div class="analysis-meta">
+                <span id="analysisDepth">固定三层参考分析</span
+                ><button id="calibrationBtn" class="text-link">
+                  校准依据 ↗
+                </button>
+              </div>
+              <div class="trend-heading">
+                局势轨迹 <span>黑方期望得分（胜＋½和）</span>
+              </div>
+              <svg
+                id="trend"
+                viewBox="0 0 240 65"
+                aria-label="局面估计变化曲线"
+              >
+                <line
+                  x1="0"
+                  y1="32.5"
+                  x2="240"
+                  y2="32.5"
+                  stroke="#d9ded8"
+                  stroke-dasharray="3 4"
+                />
+                <path
+                  id="trendPath"
+                  d=""
+                  fill="none"
+                  stroke="#416553"
+                  stroke-width="2"
+                />
+              </svg>
+            </section>
+            <section class="panel search-panel">
+              <div class="panel-title">
+                <h2>搜索观察</h2>
+                <span id="searchIndicator" class="search-indicator"></span>
+              </div>
+              <p id="strategyLabel" class="strategy-label">等待搜索开始</p>
+              <div class="search-stats">
+                <div>
+                  <span>已完成深度</span><strong id="searchDepth">—</strong>
+                </div>
+                <div>
+                  <span>访问状态数</span><strong id="searchNodes">—</strong>
+                </div>
+                <div>
+                  <span>MCTS 模拟数</span
+                  ><strong id="searchIterations">—</strong>
+                </div>
+                <div>
+                  <span>搜索用时</span><strong id="searchTime">—</strong>
+                </div>
+              </div>
+              <p id="bestMove" class="best-move">候选落点将在搜索时出现</p>
+            </section>
+            <section class="panel moves-panel">
+              <div class="panel-title">
+                <h2>行棋记录 <span id="moveCount">0</span></h2>
+                <a class="text-link" href="/api/export/game" download
+                  >导出 ↗</a
+                >
+              </div>
+              <div class="move-table-head">
+                <span>回合 / 棋方</span><span>落点</span><span>用时</span>
+              </div>
+              <div id="moveList" class="move-list">
+                <p class="empty-state">
+                  每一步，都是新的可能。<br />开始对局后在这里回看落子。
+                </p>
+              </div>
+            </section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="view-lab" class="view">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">MEASURE, COMPARE, UNDERSTAND</div>
+            <h1>让数据解释策略。</h1>
+            <p>
+              相同时间预算、成对换色、多样化开局。每一场实验都保留完整棋谱。
+            </p>
+          </div>
+          <span class="pill">独立串行实验</span>
+        </div>
+        <div class="lab-layout">
+          <section class="panel lab-config">
+            <div class="panel-title">
+              <h2>实验配置</h2>
+              <span class="mini-label">BENCHMARK</span>
+            </div>
+            <label class="field-title">参与算法</label>
+            <div id="experimentAlgorithms" class="check-list"></div>
+            <label class="field-title">每步时间上限</label>
+            <div id="experimentBudgets" class="budget-chips"></div>
+            <div class="field">
+              <label for="experimentPairs">每组算法的换色对局组数</label
+              ><select id="experimentPairs">
+                <option value="1">1 组 · 2 局（快速体验）</option>
+                <option value="3">3 组 · 6 局</option>
+                <option value="5">5 组 · 10 局</option>
+                <option value="10">10 组 · 20 局</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="experimentSeed">随机种子</label
+              ><input
+                id="experimentSeed"
+                type="number"
+                value="20261014"
+                min="0"
+              />
+            </div>
+            <p id="experimentEstimate" class="estimate"></p>
+            <button id="runExperiment" class="button primary full">
+              运行对照实验 →</button
+            ><button id="stopExperiment" class="button secondary full" disabled>
+              停止并保留已完成结果
+            </button>
+            <p class="muted">
+              实验期间不运行额外胜率分析。少量对局用于检查流程，不足以推断普遍棋力。
+            </p>
+          </section>
+          <div class="lab-results">
+            <section class="panel">
+              <div class="panel-title">
+                <h2>实验进度</h2>
+                <span id="experimentStatus" class="pill">尚未开始</span>
+              </div>
+              <div class="experiment-progress">
+                <div>
+                  <strong id="experimentCompleted">0</strong
+                  ><span id="experimentTotal"> / 0 局</span>
+                </div>
+                <p id="experimentCurrent">
+                  配置算法与时间档位，开始第一场实验。
+                </p>
+              </div>
+              <div class="progress-track">
+                <i id="experimentProgressBar"></i>
+              </div>
+            </section>
+            <section class="panel">
+              <div class="panel-title">
+                <h2>算法表现</h2>
+                <div class="export-links">
+                  <a href="/api/export/csv" download class="text-link">CSV ↗</a
+                  ><a href="/api/export/experiment" download class="text-link"
+                    >完整 JSON ↗</a
+                  >
+                </div>
+              </div>
+              <div class="table-scroll">
+                <table class="results-table">
+                  <thead>
+                    <tr>
+                      <th>算法</th>
+                      <th>时限</th>
+                      <th>胜 / 和 / 负</th>
+                      <th>胜率</th>
+                      <th>得分率</th>
+                      <th>平均用时</th>
+                    </tr>
+                  </thead>
+                  <tbody id="experimentRows">
+                    <tr>
+                      <td colspan="6" class="empty-state">
+                        实验数据将在每局结束后更新。
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="muted">
+                胜率 = 胜局 / 总局；得分率 =（胜局＋½和局）/
+                总局。时间为搜索本身耗时。
+              </p>
+              <div id="comparisonChart" class="comparison-chart" hidden>
+                <h3>得分率与时间档位</h3>
+                <svg
+                  id="comparisonSvg"
+                  viewBox="0 0 600 210"
+                  role="img"
+                  aria-label="各算法在不同时间档位的得分率"
+                ></svg>
+                <div id="comparisonLegend" class="comparison-legend"></div>
+                <p class="muted">
+                  横轴为离散档位；样本较少时曲线会有明显波动，不能据此保证棋力排序。
+                </p>
+              </div>
+            </section>
+            <section class="method-card">
+              <div class="eyebrow">A FAIR COMPARISON</div>
+              <h2>比较结果，也比较过程。</h2>
+              <div class="method-grid">
+                <div>
+                  <b>01</b>
+                  <h3>成对换色</h3>
+                  <p>每组双方复用同一合法开局，交换黑白颜色再对弈。</p>
+                </div>
+                <div>
+                  <b>02</b>
+                  <h3>统一预算</h3>
+                  <p>双方采用相同每步上限；提前算清残局可提前返回。</p>
+                </div>
+                <div>
+                  <b>03</b>
+                  <h3>可追溯</h3>
+                  <p>保存种子、环境、逐步耗时、节点数、深度和全部落点。</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-about" class="view">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">BUILT TO BE UNDERSTOOD</div>
+            <h1>看懂每一步的来由。</h1>
+            <p>规则、搜索、计时和概率，各自有清晰的定义。</p>
+          </div>
+        </div>
+        <div class="about-grid">
+          <article class="panel">
+            <span class="mini-label">01 / RULES</span>
+            <h2>经典黑白棋规则</h2>
+            <p>
+              黑方 E4、D5，白方
+              D4、E5，黑方先行。每次在空格落子，必须沿横、竖、斜方向夹住至少一枚对手棋子，所有被夹住的棋子均翻转。
+            </p>
+            <p>
+              有合法着法必须落子；无合法着法自动跳过。棋盘填满或双方都无合法落点时结束，棋子更多者获胜；相等为和棋。运行中的单步超过
+              60 秒判负。
+            </p>
+          </article>
+          <article class="panel">
+            <span class="mini-label">02 / SEARCH</span>
+            <h2>三种基线，三代改进</h2>
+            <p>
+              Minimax 与 Alpha-Beta
+              使用相同评估函数、迭代加深与走法排序。Alpha-Beta
+              额外剪去不影响最佳决策的分支。
+            </p>
+            <p>
+              MCTS 自行实现 UCT
+              选择、扩展、终局模拟和回传。模拟优先角点并避开空角附近危险格。混合
+              AI 在空格 ≤12 时切换 Alpha-Beta，其余时候使用相同 MCTS。
+            </p>
+            <p>
+              V1 保留阶段切换；V2 改用 PVS、置换表和历史排序；V3
+              再加入动态角邻格评估、潜在行动力和愿望窗口。详细方法与实测结果见“算法进化”。
+            </p>
+          </article>
+          <article class="panel">
+            <span class="mini-label">03 / PROBABILITY</span>
+            <h2>估算胜率有参考条件</h2>
+            <p>
+              主胜率由统一三层 Alpha-Beta
+              分析器提供评分，再由项目自身自对弈数据拟合黑胜、和棋、白胜三分类概率。参考对象是三层
+              Alpha-Beta 的对弈水平。
+            </p>
+            <p>
+              校准按整盘划分训练和验证，包含随机合法开局与黑白镜像样本；同一盘棋不会跨集合。未完成分析不显示虚构百分比。
+            </p>
+            <p>
+              已完全搜索的残局另行显示双方最佳应对下的结论。它不同于未知人类玩家的实际获胜概率。
+            </p>
+          </article>
+          <article class="panel">
+            <span class="mini-label">04 / TIMING</span>
+            <h2>清楚区分两种时间</h2>
+            <p>
+              对局中的本步用时包括 AI
+              进程启动与协调开销；搜索观察显示算法本身的计算时间。每回合前的统一分析不计入落子时间，动画与界面保持响应。
+            </p>
+            <p>
+              机机对局点击暂停，会在当前 AI
+              落子后暂停；人类回合立即暂停并冻结计时。更改算法和档位从下一回合生效。批量实验完全不运行胜率分析。
+            </p>
+          </article>
+        </div>
+        <section class="panel calibration-details">
+          <div class="panel-title">
+            <h2>概率校准记录</h2>
+            <button id="refreshCalibration" class="text-link">
+              刷新数据 ↻
+            </button>
+          </div>
+          <div id="calibrationDetails">正在加载校准模型信息…</div>
+          <p class="muted">
+            Brier
+            分数与对数损失越低越好，它们不是“准确率”。同一盘的多个局面相互关联，数据规模有限，不将这些指标解释为独立大样本保证。
+          </p>
+        </section>
+      </section>
+
+      <section id="view-evolution" class="view">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">A TRACEABLE EVOLUTION</div>
+            <h1>保留每一次尝试。</h1>
+            <p>从阶段切换，到搜索复用，再到局面理解。用同预算对局检验改进。</p>
+          </div>
+        </div>
+        <div class="evolution-grid">
+          <article class="panel">
+            <span class="mini-label">V1 / 原版保留</span>
+            <h2>按阶段切换</h2>
+            <p>MCTS 探索中前盘，剩余 ≤12 空格后切换 Alpha-Beta。</p>
+            <p>
+              <b>发现的问题：</b
+              >短时间内终局模拟不足；到残局才切换，无法修复前期已经失去的局面。
+            </p>
+            <p class="muted">
+              混合的是两种搜索算法的使用阶段。仍可选择和复现实验。
+            </p>
+          </article>
+          <article class="panel">
+            <span class="mini-label">V2 / 搜索机制组合</span>
+            <h2>把预算用在关键分支</h2>
+            <p>
+              PVS
+              主变化搜索＋置换表＋历史与杀手着排序＋迭代加深。保留基线评估函数。
+            </p>
+            <p>
+              <b>改进方向：</b
+              >复用重复局面，让更可能好的着法先搜索；后续分支先做零窗口验证，必要时完整重搜。
+            </p>
+            <p class="muted">
+              同深度最佳分数与基线等价，优势来自同时间内完成更多搜索。
+            </p>
+          </article>
+          <article class="panel">
+            <span class="mini-label">V3 / 动态评估组合</span>
+            <h2>搜索与局面特征协同</h2>
+            <p>
+              在 V2
+              上加入动态角邻格价值、潜在行动力、阶段性前沿子与子数权重，并用愿望窗口加速搜索。
+            </p>
+            <p>
+              <b>改进方向：</b
+              >区分空角旁危险格与已占角旁可用格，重视未来落点与棋形；不只追求当前子数。
+            </p>
+            <p class="muted">
+              经典方法的自主实现与组合，不将 PVS 等已有技术宣称为原创。
+            </p>
+          </article>
+        </div>
+        <section class="panel evolution-results">
+          <div class="panel-title">
+            <h2>冻结参数后的独立验证</h2>
+            <a
+              class="text-link"
+              href="/api/evolution"
+              download="evolution-summary.json"
+              >导出摘要 ↗</a
+            >
+          </div>
+          <p id="evolutionConclusion">正在读取验证记录…</p>
+          <div class="table-scroll">
+            <table class="results-table">
+              <thead>
+                <tr>
+                  <th>候选版本</th>
+                  <th>对手</th>
+                  <th>每步上限</th>
+                  <th>胜 / 和 / 负</th>
+                  <th>胜率</th>
+                  <th>得分率</th>
+                  <th>配对得分率 95% 区间</th>
+                </tr>
+              </thead>
+              <tbody id="evolutionRows"></tbody>
+            </table>
+          </div>
+          <p class="muted">
+            验证使用未参与筛选的开局种子，每组交换黑白，双方相同时间上限、串行搜索，无额外分析或开局库。区间按完整换色组
+            bootstrap；只描述本机与此开局样本，不保证所有对手、所有时间档位都更强。
+          </p>
+          <p class="muted">
+            全胜小样本会使 bootstrap 区间退化，因此不展示该区间；12/12
+            不代表以后必胜。 源码包的 EVOLUTION.md
+            记录筛选、版本差异与复现命令；versions/
+            保存代码快照；results/evolution/ 保存完整棋谱和代码哈希。
+          </p>
+        </section>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <span><b>REVERSI LAB</b> / 人工智能实践项目</span
+      ><span>自主实现 · 本地运行 · 可复现实验</span>
+    </footer>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <dialog id="confirmDialog">
+      <form method="dialog">
+        <span class="eyebrow">NEW GAME</span>
+        <h2>开始新的对局？</h2>
+        <p>当前棋盘和行棋记录会重置。需要保留时，请先导出棋谱。</p>
+        <div class="button-row">
+          <button value="cancel" class="button secondary">保留当前对局</button
+          ><button value="confirm" class="button primary">新建对局</button>
+        </div>
+      </form>
+    </dialog>
+  </body>
+</html>

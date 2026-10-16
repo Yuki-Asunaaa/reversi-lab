@@ -1,0 +1,619 @@
+{
+  "version": 1,
+  "config": {
+    "mode": "eve",
+    "human_color": 1,
+    "black": {
+      "algorithm": "hybrid",
+      "seconds": 0.2
+    },
+    "white": {
+      "algorithm": "alphabeta",
+      "seconds": 0.2
+    }
+  },
+  "history": [
+    {
+      "ply": 1,
+      "color": 1,
+      "move": 44,
+      "coordinate": "E6",
+      "elapsed": 0.2565917500000001,
+      "search_elapsed": 0.190021583,
+      "seconds": 0.2,
+      "algorithm": "hybrid",
+      "nodes": 6429,
+      "depth": 0,
+      "iterations": 106,
+      "strategy": "混合 · 中前盘 MCTS",
+      "exact": false
+    },
+    {
+      "ply": 2,
+      "color": -1,
+      "move": 45,
+      "coordinate": "F6",
+      "elapsed": 0.25894762499999935,
+      "search_elapsed": 0.190021542,
+      "seconds": 0.2,
+      "algorithm": "alphabeta",
+      "nodes": 5497,
+      "depth": 6,
+      "iterations": 0,
+      "strategy": "Alpha-Beta",
+      "exact": false
+    },
+    {
+      "ply": 3,
+      "color": 1,
+      "move": 26,
+      "coordinate": "C4",
+      "elapsed": 0.2633095830000016,
+      "search_elapsed": 0.190029917,
+      "seconds": 0.2,
+      "algorithm": "hybrid",
+      "nodes": 6965,
+      "depth": 0,
+      "iterations": 118,
+      "strategy": "混合 · 中前盘 MCTS",
+      "exact": false
+    },
+    {
+      "ply": 4,
+      "color": -1,
+      "move": 43,
+      "coordinate": "D6",
+      "elapsed": 0.2580720420000002,
+      "search_elapsed": 0.19000870800000003,
+      "seconds": 0.2,
+      "algorithm": "alphabeta",
+      "nodes": 5410,
+      "depth": 6,
+      "iterations": 0,
+      "strategy": "Alpha-Beta",
+      "exact": false
+    },
+    {
+      "ply": 5,
+      "color": 1,
+      "move": 37,
+      "coordinate": "F5",
+      "elapsed": 0.2606169999999999,
+      "search_elapsed": 0.19002375000000002,
+      "seconds": 0.2,
+      "algorithm": "hybrid",
+      "nodes": 6712,
+      "depth": 0,
+      "iterations": 118,
+      "strategy": "混合 · 中前盘 MCTS",
+      "exact": false
+    }
+  ],
+  "analysis_history": [
+    {
+      "ply": 0,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.5136164283242501,
+          "draw": 0.04126308949576427,
+          "white": 0.44512048217998573
+        },
+        "score": 50,
+        "depth": 3,
+        "nodes": 71,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    },
+    {
+      "ply": 1,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.4687627282774992,
+          "draw": 0.041850417369115774,
+          "white": 0.4893868543533849
+        },
+        "score": -15,
+        "depth": 3,
+        "nodes": 69,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    },
+    {
+      "ply": 2,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.531363136453155,
+          "draw": 0.04167297177572208,
+          "white": 0.42696389177112287
+        },
+        "score": 76,
+        "depth": 3,
+        "nodes": 46,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    },
+    {
+      "ply": 3,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.4423140623473738,
+          "draw": 0.042266812755815224,
+          "white": 0.515419124896811
+        },
+        "score": -53,
+        "depth": 3,
+        "nodes": 105,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    },
+    {
+      "ply": 4,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.4909986467390388,
+          "draw": 0.04292373965196351,
+          "white": 0.4660776136089977
+        },
+        "score": 18,
+        "depth": 3,
+        "nodes": 103,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    },
+    {
+      "ply": 5,
+      "analysis": {
+        "status": "calibrated",
+        "probabilities": {
+          "black": 0.4451894614225658,
+          "draw": 0.04308982732069464,
+          "white": 0.5117207112567396
+        },
+        "score": -48,
+        "depth": 3,
+        "nodes": 158,
+        "exact": false,
+        "label": "参考三层 Alpha-Beta 自对弈水平的估算",
+        "validation": {
+          "brier_multiclass": 0.3115996145404377,
+          "log_loss": 0.5073534397484881,
+          "samples_with_color_mirror": 1682,
+          "reliability_bins": [
+            {
+              "count": 179,
+              "predicted": 0.030713826437178498,
+              "observed": 0.0111731843575419
+            },
+            {
+              "count": 102,
+              "predicted": 0.15254541980010233,
+              "observed": 0.0784313725490196
+            },
+            {
+              "count": 113,
+              "predicted": 0.25317808823472493,
+              "observed": 0.09734513274336283
+            },
+            {
+              "count": 124,
+              "predicted": 0.35293304711851486,
+              "observed": 0.2661290322580645
+            },
+            {
+              "count": 476,
+              "predicted": 0.4548991019717367,
+              "observed": 0.4831932773109244
+            },
+            {
+              "count": 244,
+              "predicted": 0.5355401726353003,
+              "observed": 0.5901639344262295
+            },
+            {
+              "count": 121,
+              "predicted": 0.6500743681525365,
+              "observed": 0.8264462809917356
+            },
+            {
+              "count": 103,
+              "predicted": 0.7488188444345553,
+              "observed": 0.9514563106796117
+            },
+            {
+              "count": 80,
+              "predicted": 0.8517853115817274,
+              "observed": 0.95
+            },
+            {
+              "count": 140,
+              "predicted": 0.9619909094429117,
+              "observed": 0.9928571428571429
+            }
+          ],
+          "prior_baseline_brier": 0.5038439927161888,
+          "train_games": 96,
+          "heldout_games": 32
+        }
+      }
+    }
+  ],
+  "result": null,
+  "reason": "",
+  "final_cells": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    -1,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "time_note": "elapsed 含搜索进程启动及协调开销；search_elapsed 仅搜索；回合前统一分析不计入落子时间"
+}

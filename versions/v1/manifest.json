@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "algorithm": "hybrid",
+  "description": "MCTS (>12空格) + Alpha-Beta (≤12空格)，原算法逻辑保留",
+  "files": {
+    "board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333",
+    "search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "conclusion": "0.05 秒独立验证中，V3 对三种基线均取得明显优势：各组得分率超过 65%，配对得分率 95% 区间下界均高于 50%。结论限定于本机与所测开局；不宣称无限时间优势。",
+  "criterion": "每个基线同档位得分率≥65%，按开局组 bootstrap 的95%区间下界>50%；描述性实测门槛，非普遍棋力保证",
+  "comparisons": [
+    {
+      "candidate": "hybrid_v3",
+      "opponent": "alphabeta",
+      "seconds": 0.05,
+      "games": 32,
+      "wins": 25,
+      "draws": 1,
+      "losses": 6,
+      "win_rate": 0.78125,
+      "score_rate": 0.796875,
+      "paired_bootstrap_95": [
+        0.65625,
+        0.921875
+      ],
+      "completed_pairs": 16,
+      "mean_seconds": 0.042253845719467845,
+      "max_overrun": 0.0001243329999994075,
+      "mean_depth": 4.9105199516324065,
+      "opponent_mean_depth": 4.212468193384224,
+      "interval_note": ""
+    },
+    {
+      "candidate": "hybrid_v3",
+      "opponent": "minimax",
+      "seconds": 0.05,
+      "games": 32,
+      "wins": 31,
+      "draws": 0,
+      "losses": 1,
+      "win_rate": 0.96875,
+      "score_rate": 0.96875,
+      "paired_bootstrap_95": [
+        0.90625,
+        1.0
+      ],
+      "completed_pairs": 16,
+      "mean_seconds": 0.04209243434166677,
+      "max_overrun": 0.0034755000000046693,
+      "mean_depth": 4.817857142857143,
+      "opponent_mean_depth": 3.0376134889753565,
+      "interval_note": ""
+    },
+    {
+      "candidate": "hybrid_v3",
+      "opponent": "mcts",
+      "seconds": 0.05,
+      "games": 32,
+      "wins": 31,
+      "draws": 1,
+      "losses": 0,
+      "win_rate": 0.96875,
+      "score_rate": 0.984375,
+      "paired_bootstrap_95": [
+        0.953125,
+        1.0
+      ],
+      "completed_pairs": 16,
+      "mean_seconds": 0.04259650970270288,
+      "max_overrun": 3.8666000006057355e-05,
+      "mean_depth": 4.515863689776733,
+      "opponent_mean_depth": 0.0,
+      "interval_note": ""
+    },
+    {
+      "candidate": "hybrid_v3",
+      "opponent": "alphabeta",
+      "seconds": 0.2,
+      "games": 32,
+      "wins": 27,
+      "draws": 0,
+      "losses": 5,
+      "win_rate": 0.84375,
+      "score_rate": 0.84375,
+      "paired_bootstrap_95": [
+        0.71875,
+        0.9375
+      ],
+      "completed_pairs": 16,
+      "mean_seconds": 0.16258086896376786,
+      "max_overrun": 9.03750000020298e-05,
+      "mean_depth": 6.195652173913044,
+      "opponent_mean_depth": 5.238035264483627,
+      "interval_note": ""
+    },
+    {
+      "candidate": "hybrid_v3",
+      "opponent": "hybrid",
+      "seconds": 0.05,
+      "games": 12,
+      "wins": 12,
+      "draws": 0,
+      "losses": 0,
+      "win_rate": 1.0,
+      "score_rate": 1.0,
+      "paired_bootstrap_95": null,
+      "completed_pairs": 6,
+      "mean_seconds": 0.04210069323809526,
+      "max_overrun": 0.009320541000001722,
+      "mean_depth": 4.46984126984127,
+      "opponent_mean_depth": 1.0600706713780919,
+      "interval_note": "样本无组间差异，bootstrap 区间退化，不代表真实胜率确定"
+    }
+  ],
+  "sources": [
+    {
+      "file": "validation_005.json",
+      "games": 96,
+      "hashes": {
+        "reversi/search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31",
+        "reversi/advanced.py": "780a6878faa2f5fff6295fc22cb2054748836cb05acecad7312be02f86933511",
+        "reversi/board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333"
+      },
+      "environment": {
+        "python": "3.9.6",
+        "platform": "macOS-15.5-arm64-arm-64bit"
+      }
+    },
+    {
+      "file": "validation_020.json",
+      "games": 32,
+      "hashes": {
+        "reversi/search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31",
+        "reversi/advanced.py": "780a6878faa2f5fff6295fc22cb2054748836cb05acecad7312be02f86933511",
+        "reversi/board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333"
+      },
+      "environment": {
+        "python": "3.9.6",
+        "platform": "macOS-15.5-arm64-arm-64bit"
+      }
+    },
+    {
+      "file": "validation_v1.json",
+      "games": 12,
+      "hashes": {
+        "reversi/search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31",
+        "reversi/advanced.py": "780a6878faa2f5fff6295fc22cb2054748836cb05acecad7312be02f86933511",
+        "reversi/board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333"
+      },
+      "environment": {
+        "python": "3.9.6",
+        "platform": "macOS-15.5-arm64-arm-64bit"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "version": "probability-v1",
+  "files": {
+    "reversi/analysis.py": "6f16c0c29829c610afce9fe648cb5f2da5cd3b86e93630432be811e1ff1012f4",
+    "tools/calibrate.py": "d137b80efa52c8a94a88ff5781d5dcad47a90775920c97c56a55328f4b3db8ad",
+    "data/calibration.json": "8d138332eaf517e926fb3bb362cbcebf3fd2437c1f755d627e34ac425f69eca2",
+    "data/calibration_games.json": "8c969c14fd3abb99deb98d0ce602fc7b32c4c40a0c79e83535c151c55d82a95e",
+    "reversi/search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31",
+    "reversi/board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333",
+    "README.md": "20612f1a10499482ba04d5715071b05506e97dfe1886be317fff331df0f43a89",
+    "web/app.js": "66d122da1619e3d01ae06a4d7d18743fe67a5e6354e4ec557edb4aefd65e9c9e",
+    "web/index.html": "d8803531e6bb1e340a3a67c42e93631100c7f290ae277fb444ccab880c2b8c32",
+    "reversi/__init__.py": "90d5e68e4861cd3c9ccd725676038c306c2a766859ca75a796468943d5fbae14"
+  }
+}

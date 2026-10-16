@@ -1,0 +1,10 @@
+{
+  "version": "v3",
+  "algorithm": "hybrid_v3",
+  "description": "V2 + 愿望窗口 + 动态角邻格/潜在行动力/阶段性评估",
+  "files": {
+    "advanced.py": "780a6878faa2f5fff6295fc22cb2054748836cb05acecad7312be02f86933511",
+    "board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333",
+    "search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31"
+  }
+}

@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: reversi-lab
+    runtime: python
+    plan: free
+    buildCommand: python --version
+    startCommand: python main.py --no-browser
+    healthCheckPath: /api/state
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11

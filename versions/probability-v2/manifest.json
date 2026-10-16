@@ -1,0 +1,17 @@
+{
+  "version": "probability-v2",
+  "validation": "not_performed_at_user_request",
+  "files": {
+    "reversi/analysis.py": "a5a966624a3f781f3d9b080765958de2a79961319ba5bcd28d83f219b9efea1a",
+    "reversi/probability.py": "0b419c1a801228050da1eef5c0801034c62fb4a93cacd4c5d8e429eadcb14466",
+    "reversi/advanced.py": "780a6878faa2f5fff6295fc22cb2054748836cb05acecad7312be02f86933511",
+    "reversi/search.py": "07781fcd5c01a5bdaa5527591f2360fa9cc8d6446bf40e19dbd88fd43d633f31",
+    "reversi/board.py": "fd20002d57cf8fa16e76f293defde6afe53ee67f94a46d9bb6194017c4ce4333",
+    "reversi/__init__.py": "90d5e68e4861cd3c9ccd725676038c306c2a766859ca75a796468943d5fbae14",
+    "tools/train_probability.py": "f24dd62c58d87814db9ea38e6602ca3fd994353a01c4bbdac94a695ec0bb1dea",
+    "data/probability_v2.json": "470456eeaef6ff1d94443850c4992ce61ab1d4523f689e189a74d6f47e6b7240",
+    "data/probability_v2_samples.json": "a956611b531eb493a07450637fc4d12d6a42dee838a8ec0e0a3a3f0a61a8a8cb",
+    "data/probability_v2_training_games.json": "3fda53182740851c0fe1f924e664d7a8899f9ffe139d8eedfea6706369f831ef",
+    "PROBABILITY_EVOLUTION.md": "af87b409e6b22d61df31df5ae8b102e960a1c53a37f1e865b1848da4b2d14a51"
+  }
+}
